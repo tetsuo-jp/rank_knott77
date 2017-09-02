@@ -23,7 +23,6 @@ module Rank
   # @param [int] a
   # @return [int] rank value
   def r(p,n,a,s)
-    # puts "p=#{p}, n=#{n}, a=#{a}, s=#{s}"
     j = p[a-1] - s - 1
     v = 0
     i = 0
@@ -31,8 +30,8 @@ module Rank
       v += b(i) * b(n-i-1)
     end
     v +
-      b(n-j-1) * ((j <= 1 ? 1 : r(p,j,a+1,s)) - 1) +
-      ((n - j - 1 <= 1) ? 1 : r(p,n-j-1,a+j+1,s+j+1))
+      (j <= 1 ? 0 : b(n-j-1) * (r(p,j,a+1,s) - 1)) +
+      (n-j-1 <= 1 ? 1 : r(p,n-j-1,a+j+1,s+j+1))
   end
 
   # compute the rank of the tree permutation defined by (p[0], p[1], ..., p[n-1])
